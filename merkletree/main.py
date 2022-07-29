@@ -9,5 +9,5 @@ def get_md5(value):
 if __name__ == '__main__':
     initial_arr = input('初始化数据列表(元素用逗号隔开):').split(",") 
     tree = get_merkle_tree(initial_arr,get_md5)
-    print("使用md5做出的merker tree为",tree)
+    print("使用md5做出的merkle tree为",tree)
     print("根哈希为{}".format(tree[len(tree)-1]))
