@@ -4,3 +4,4 @@
 - SM3 实现
 - merkle tree 实现
 - SM3 生日攻击
+- SM3 Rho攻击
