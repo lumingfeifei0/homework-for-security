@@ -6,7 +6,7 @@ def get_row(arr,func):
         for i in range(0,lenth,2):
             row.append(func(arr[i]+arr[i+1]))
     else:
-        for i in range(0,lenth,2):
+        for i in range(0,lenth-1,2):
             row.append(func(arr[i]+arr[i+1]))
         row.append(func(arr[lenth-1]))
     return row
