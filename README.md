@@ -3,3 +3,4 @@
 完成内容：
 - SM3 实现
 - merkle tree 实现
+- SM3 生日攻击
