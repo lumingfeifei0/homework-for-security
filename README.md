@@ -5,3 +5,4 @@
 - merkle tree 实现
 - SM3 生日攻击
 - SM3 Rho攻击
+- SM4 实现及优化
