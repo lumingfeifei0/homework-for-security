@@ -139,16 +139,21 @@ def sm3(msg):
 #通过构造环形结构来尝试实现碰撞，挑选构造函数为x**2+1
 def rho_attack(n):
     x = random.randint(0,2**64)
+    templist = []
     cmplist = []
+    templist.append(x)
     cmplist.append(sm3(x)[:n//4])
     while 1:
         x = (x**2 + 1) % (2**64)
         k = sm3(x)[:n//4]
-        if k in cmplist:
+        if x in templist:
+            continue
+        elif k in cmplist:
             print("成功找到一个碰撞!(前{}bit)".format(n))
             break
         else:
             cmplist.append(k)
+            templist.append(x)
 
 if __name__ == '__main__':
     start = time.time()
