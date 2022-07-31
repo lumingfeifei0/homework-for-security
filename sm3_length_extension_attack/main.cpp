@@ -4,7 +4,7 @@
 #include"func.h"
 using namespace std;
 
-//·µ»ØTj³£Á¿Öµ
+//è¿”å›Tjå¸¸é‡å€¼
 string T(int j) {
 	if (0 <= j && j <= 15) {
 		return "79CC4519";
@@ -14,7 +14,7 @@ string T(int j) {
 	}
 }
 
-//²¼¶ûº¯ÊıFF
+//å¸ƒå°”å‡½æ•°FF
 string FF(string str1, string str2, string str3, int j) {
 	if (0 <= j && j <= 15) {
 		return XOR(XOR(str1, str2), str3);
@@ -24,7 +24,7 @@ string FF(string str1, string str2, string str3, int j) {
 	}
 }
 
-//²¼¶ûº¯ÊıGG
+//å¸ƒå°”å‡½æ•°GG
 string GG(string str1, string str2, string str3, int j) {
 	if (0 <= j && j <= 15) {
 		return XOR(XOR(str1, str2), str3);
@@ -34,17 +34,17 @@ string GG(string str1, string str2, string str3, int j) {
 	}
 }
 
-//ÖÃ»»º¯ÊıP0
+//ç½®æ¢å‡½æ•°P0
 string P0(string str) {
 	return XOR(XOR(str, shift(str, 9)), shift(str, 17));
 }
 
-//ÖÃ»»º¯ÊıP1
+//ç½®æ¢å‡½æ•°P1
 string P1(string str) {
 	return XOR(XOR(str, shift(str, 15)), shift(str, 23));
 }
 
-//mod 2^32ÔËËãµÄº¯ÊıÊµÏÖ
+//mod 2^32è¿ç®—çš„å‡½æ•°å®ç°
 string ModAdd(string str1, string str2) {
 	string res1 = Hex2Bin(str1);
 	string res2 = Hex2Bin(str2);
@@ -67,7 +67,7 @@ string ModAdd(string str1, string str2) {
 	return Bin2Hex(res);
 }
 
-//ÏûÏ¢Ìî³ä£¬ÊäÈëstrÎªÊ®½øÖÆ£¬Êä³öÎªÊ®Áù½øÖÆ×Ö´®
+//æ¶ˆæ¯å¡«å……ï¼Œè¾“å…¥strä¸ºåè¿›åˆ¶ï¼Œè¾“å‡ºä¸ºåå…­è¿›åˆ¶å­—ä¸²
 string padding(string str) {
 	string res = "";
 	for (int i = 0; i < str.size(); i++) {
@@ -87,7 +87,7 @@ string padding(string str) {
 }
 
 
-//ÏûÏ¢À©Õ¹
+//æ¶ˆæ¯æ‰©å±•
 string extension(string str) {
 	string res = str;
 	for (int i = 16; i < 68; i++) {
@@ -99,7 +99,7 @@ string extension(string str) {
 	return res;
 }
 
-//ÏûÏ¢Ñ¹Ëõ
+//æ¶ˆæ¯å‹ç¼©
 string compress(string str1, string str2) {
 	string IV = str2;
 	string A = IV.substr(0, 8), B = IV.substr(8, 8), C = IV.substr(16, 8), D = IV.substr(24, 8), E = IV.substr(32, 8), F = IV.substr(40, 8), G = IV.substr(48, 8), H = IV.substr(56, 8);
@@ -122,10 +122,10 @@ string compress(string str1, string str2) {
 	return res;
 }
 
-//µü´úÑ¹Ëõº¯Êı
+//è¿­ä»£å‹ç¼©å‡½æ•°
 string iteration(string str) {
 	int num = str.size() / 128;
-	string V = "7380166F4914B2B9172442D7DA8A0600A96F30BC163138AAE38DEE4DB0FB0E4E";	//³õÊ¼IV
+	string V = "7380166F4914B2B9172442D7DA8A0600A96F30BC163138AAE38DEE4DB0FB0E4E";	//åˆå§‹IV
 	string B = "", extensionB = "", compressB = "";
 	for (int i = 0; i < num; i++) {
 		B = str.substr(i * 128, 128);
@@ -150,12 +150,12 @@ string lenth_attack_iteration(string str, string iv) {
 }
 
 void lenth_attack(string m1, string m2) {
-	string V = "7380166F4914B2B9172442D7DA8A0600A96F30BC163138AAE38DEE4DB0FB0E4E";	//³õÊ¼IV
+	string V = "7380166F4914B2B9172442D7DA8A0600A96F30BC163138AAE38DEE4DB0FB0E4E";	//åˆå§‹IV
 	string pad = padding(m1);
 	string x1 = lenth_attack_iteration(pad, V);
 	string x2 = lenth_attack_iteration(pad + m2, V);
 
-	cout << "Ô­¹şÏ£½á¹û£º" << endl;
+	cout << "åŸå“ˆå¸Œç»“æœï¼š" << endl;
 	for (int i = 0; i < x2.size() / 64; i++) {
 		for (int j = 0; j < 8; j++) {
 			cout << x2.substr(i * 64 + j * 8, 8) << "  ";
@@ -165,7 +165,7 @@ void lenth_attack(string m1, string m2) {
 
 	string x3 = lenth_attack_iteration(m2, x1);
 
-	cout << "³¤¶ÈÀ©Õ¹ºó¹şÏ£½á¹û£º" << endl;
+	cout << "é•¿åº¦æ‰©å±•åå“ˆå¸Œç»“æœï¼š" << endl;
 	for (int i = 0; i < x3.size() / 64; i++) {
 		for (int j = 0; j < 8; j++) {
 			cout << x3.substr(i * 64 + j * 8, 8) << "  ";
@@ -173,36 +173,13 @@ void lenth_attack(string m1, string m2) {
 		cout << endl;
 	}
 	if (x2 == x3) {
-		cout << "¹¥»÷³É¹¦£¡" << endl;
+		cout << "æ”»å‡»æˆåŠŸï¼" << endl;
 	}
 }
 
-
-
-//int main() {//Ö÷º¯Êı
-//	string str_test = "abc";
-//	cout << "ÊäÈëÏûÏ¢Îª×Ö·û´®: " + str_test << endl;
-//	cout << endl;
-//	string paddingValue = padding(str_test);
-//	cout << "Ìî³äºóµÄÏûÏ¢Îª£º" << endl;
-//	for (int i = 0; i < paddingValue.size() / 64; i++) {
-//		for (int j = 0; j < 8; j++) {
-//			cout << paddingValue.substr(i * 64 + j * 8, 8) << "  ";
-//		}
-//		cout << endl;
-//	}
-//	string result = iteration(paddingValue);
-//	cout << "×îÖÕµÄÔÓ´ÕÖµÎª£º" << endl;
-//	for (int i = 0; i < 8; i++) {
-//		cout << result.substr(i * 8, 8) << "  ";
-//	}
-//	cout << endl;
-//	return 0;
-//}
-
 int main() {
 	string r1 = "abcd";
-	string r2 = "hutao";
+	string r2 = "efjh";
 	lenth_attack(r1, r2);
 	return 0;
 }
