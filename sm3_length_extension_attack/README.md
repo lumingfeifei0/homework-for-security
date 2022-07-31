@@ -20,5 +20,5 @@ lenth_attack函数，实现长度扩展攻击。
 
 运行结果如图：
 
-
+![image](https://github.com/lumingfeifei0/homework-for-security/blob/main/sm3_length_extension_attack/capture_20220731133644235.jpg)
 
